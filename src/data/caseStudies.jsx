@@ -1,3 +1,5 @@
+import { asset } from "../utils/assets";
+
 export const caseStudies = {
   honnova: {
     bodyClass: "",
@@ -5,7 +7,7 @@ export const caseStudies = {
     sectionClassName: "honnova-case",
     logo: {
       className: "honnova-logo-img",
-      src: "/assets/honnova-logo.png",
+      src: asset("assets/honnova-logo.png"),
       alt: "まちの本棚アプリ ホンノバ",
     },
     overviewPanels: [
@@ -25,7 +27,7 @@ export const caseStudies = {
         ],
       ],
     ],
-    mockImages: ["/assets/honnnoba-top-1.png", "/assets/honnoba-top-3.png", "/assets/honnnoba-top-7.png"],
+    mockImages: [asset("assets/honnnoba-top-1.png"), asset("assets/honnoba-top-3.png"), asset("assets/honnnoba-top-7.png")],
     problems: [
       ["ユーザー(町民)", "本のある場所や、まちの中の本棚を探しづらい。"],
       ["本のある場の管理者", "本棚の存在や、置いている本の魅力を届けにくい。"],
@@ -48,23 +50,23 @@ export const caseStudies = {
       eyebrow: "Service Design",
       className: "honnova-service-design",
       screens: [
-        { id: "1", src: "/assets/honnoba-detail-1.png" },
-        { id: "2", src: "/assets/honnoba-detail-2.png" },
-        { id: "3", src: "/assets/honnoba-detail-3.png" },
-        { id: "4", src: "/assets/honnoba-detail-4.jpg", className: "service-screen--landscape" },
-        { id: "5", src: "/assets/honnova-thumb.jpg.png", className: "service-screen--landscape" },
+        { id: "1", src: asset("assets/honnoba-detail-1.png") },
+        { id: "2", src: asset("assets/honnoba-detail-2.png") },
+        { id: "3", src: asset("assets/honnoba-detail-3.png") },
+        { id: "4", src: asset("assets/honnoba-detail-4.jpg"), className: "service-screen--landscape" },
+        { id: "5", src: asset("assets/honnova-thumb.jpg.png"), className: "service-screen--landscape" },
       ],
       steps: [
-        ["1", "/assets/01-img.png", "01", "知る", "まちにある本棚や、本棚に置かれている本の存在を知る。"],
-        ["2", "/assets/2-img.png", "02", "探す", "気になる本棚や本を探し、行きたい場所を見つける。"],
-        ["3", "/assets/3-img.png", "03", "見る", "本棚の情報、置かれている本、場所の雰囲気を見る。"],
-        ["4", "/assets/4-img.png", "04", "行く", "実際にその場所へ行き、本や本棚に触れる。"],
-        ["5", "/assets/5-img.svg", "05", "出会う", "本をきっかけに、場所や人との新しい接点を見つける。"],
+        ["1", asset("assets/01-img.png"), "01", "知る", "まちにある本棚や、本棚に置かれている本の存在を知る。"],
+        ["2", asset("assets/2-img.png"), "02", "探す", "気になる本棚や本を探し、行きたい場所を見つける。"],
+        ["3", asset("assets/3-img.png"), "03", "見る", "本棚の情報、置かれている本、場所の雰囲気を見る。"],
+        ["4", asset("assets/4-img.png"), "04", "行く", "実際にその場所へ行き、本や本棚に触れる。"],
+        ["5", asset("assets/5-img.svg"), "05", "出会う", "本をきっかけに、場所や人との新しい接点を見つける。"],
       ],
     },
     field: {
       heading: "Field Test",
-      image: "/assets/honnoaruba-img.png",
+      image: asset("assets/honnoaruba-img.png"),
       imageAlt: "ホンノバで導入した本のある場の地図",
       stats: [
         ["登録場数", "4"],
@@ -96,7 +98,7 @@ export const caseStudies = {
     sectionClassName: "honnova-case",
     logo: {
       className: "makeyou-logo-img",
-      src: "/assets/makeyou-logo.png",
+      src: asset("assets/makeyou-logo.png"),
       alt: "MAKE YOU",
     },
     overviewPanels: [
@@ -115,7 +117,7 @@ export const caseStudies = {
         ],
       ],
     ],
-    mockImages: ["/assets/makeyou-top-1.png", "/assets/makeyou-top-2.png", "/assets/makeyou-top-3.png"],
+    mockImages: [asset("assets/makeyou-top-1.png"), asset("assets/makeyou-top-2.png"), asset("assets/makeyou-top-3.png")],
     problems: [
       ["情報が散らばる", "健康や運動に関する情報が複数のSNSに分かれている。"],
       ["保存しても活用しにくい", "あとから見返しづらく、実際の行動につながりにくい。"],
@@ -130,14 +132,14 @@ export const caseStudies = {
       eyebrow: "Service Design",
       className: "make-service-design",
       screens: [
-        { id: "1", src: "/assets/makeyou-detail-1.png" },
-        { id: "2", src: "/assets/makeyou-detail-2.png" },
-        { id: "3", src: "/assets/makeyou-detail-3.png" },
+        { id: "1", src: asset("assets/makeyou-detail-1.png") },
+        { id: "2", src: asset("assets/makeyou-detail-2.png") },
+        { id: "3", src: asset("assets/makeyou-detail-3.png") },
       ],
       steps: [
-        ["1", "/assets/01-img.png", "01", "SNS型の投稿閲覧", "健康・運動に関する投稿だけを見られるSNS型の画面"],
-        ["2", "/assets/2-img.png", "02", "保存フォルダ", "気になった投稿や動画を、自分のフォルダに保存できる機能"],
-        ["3", "/assets/3-img.png", "03", "動画ToDo化", "保存したエクササイズ動画を組み合わせ、自分用のToDoリストとして管理する"],
+        ["1", asset("assets/01-img.png"), "01", "SNS型の投稿閲覧", "健康・運動に関する投稿だけを見られるSNS型の画面"],
+        ["2", asset("assets/2-img.png"), "02", "保存フォルダ", "気になった投稿や動画を、自分のフォルダに保存できる機能"],
+        ["3", asset("assets/3-img.png"), "03", "動画ToDo化", "保存したエクササイズ動画を組み合わせ、自分用のToDoリストとして管理する"],
       ],
     },
     feedback: [
@@ -156,7 +158,7 @@ export const caseStudies = {
     sectionClassName: "honnova-case",
     logo: {
       className: "honnova-logo-img",
-      src: "/assets/kamiyamacast-logo.png",
+      src: asset("assets/kamiyamacast-logo.png"),
       alt: "KamiyamaCast",
     },
     overviewPanels: [
@@ -170,7 +172,7 @@ export const caseStudies = {
         ["サイトリンク", <a href="https://kamiyamacast.jp/" target="_blank">https://kamiyamacast.jp/</a>],
       ],
     ],
-    mockImages: ["/assets/kamiyamacast-top-1.png", "/assets/kamiyamacast-top-2.jpg", "/assets/kamiyamacast-top-3.jpg"],
+    mockImages: [asset("assets/kamiyamacast-top-1.png"), asset("assets/kamiyamacast-top-2.jpg"), asset("assets/kamiyamacast-top-3.jpg")],
     concept: {
       className: "cast-concept",
       heading: <>飾らない声で<br />高専の今を届ける。</>,
@@ -182,18 +184,18 @@ export const caseStudies = {
       stackClassName: "service-screen-stack--media",
       screenClassName: "media-service-screen cast-service-screen",
       screens: [
-        { id: "1", src: "/assets/kamiyamacast-detail-1.png" },
-        { id: "2", src: "/assets/assets:kamiyamacast-thumb.JPG" },
-        { id: "3", src: "/assets/kamiyamacast-detail-3.png" },
-        { id: "4", src: "/assets/kamiyamacast-detail-4.png" },
-        { id: "5", src: "/assets/kamiyamacast-detail-5.png" },
+        { id: "1", src: asset("assets/kamiyamacast-detail-1.png") },
+        { id: "2", src: asset("assets/assets:kamiyamacast-thumb.JPG") },
+        { id: "3", src: asset("assets/kamiyamacast-detail-3.png") },
+        { id: "4", src: asset("assets/kamiyamacast-detail-4.png") },
+        { id: "5", src: asset("assets/kamiyamacast-detail-5.png") },
       ],
       steps: [
-        ["1", "/assets/01-img.png", "01", "企画", "話すテーマやゲスト、届けたい相手を考える"],
-        ["2", "/assets/2-img.png", "02", "収録", "学生同士の自然な会話を大切にしながら収録する"],
-        ["3", "/assets/3-img.png", "03", "編集", "聞きやすさを意識して音声を整え、必要に応じて構成を調整する"],
-        ["4", "/assets/4-img.png", "04", "配信", "Podcastプラットフォームで公開し、サイトやSNSからアクセスできるようにする"],
-        ["5", "/assets/5-img.svg", "05", "広報・配信", "公開したエピソードをサイトやSNSで発信し、より多くの人にKamiyamaCastを届ける"],
+        ["1", asset("assets/01-img.png"), "01", "企画", "話すテーマやゲスト、届けたい相手を考える"],
+        ["2", asset("assets/2-img.png"), "02", "収録", "学生同士の自然な会話を大切にしながら収録する"],
+        ["3", asset("assets/3-img.png"), "03", "編集", "聞きやすさを意識して音声を整え、必要に応じて構成を調整する"],
+        ["4", asset("assets/4-img.png"), "04", "配信", "Podcastプラットフォームで公開し、サイトやSNSからアクセスできるようにする"],
+        ["5", asset("assets/5-img.svg"), "05", "広報・配信", "公開したエピソードをサイトやSNSで発信し、より多くの人にKamiyamaCastを届ける"],
       ],
     },
     audio: {
@@ -204,7 +206,7 @@ export const caseStudies = {
     },
     field: {
       heading: "Web / Information Design",
-      image: "/assets/kamiyamacast-detail-6.png",
+      image: asset("assets/kamiyamacast-detail-6.png"),
       imageAlt: "KamiyamaCastのWebサイト設計イメージ",
       text: "番組一覧、Spotifyの埋め込み、お便り募集などの導線を整理し、初めて訪れた人でも聴きたい番組にたどり着けるWebサイトの設計にも取り組んでいます。",
     },

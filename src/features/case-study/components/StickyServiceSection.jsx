@@ -18,7 +18,7 @@ const ServiceRoot = styled.div.attrs(({ $variant }) => ({
       ? `
         background-image:
           linear-gradient(rgba(216, 216, 216, 0.62), rgba(216, 216, 216, 0.62)),
-          url("/assets/honnova-thumb.jpg.png");
+          url("${import.meta.env.BASE_URL}assets/honnova-thumb.jpg.png");
       `
       : ""}
 
@@ -27,7 +27,7 @@ const ServiceRoot = styled.div.attrs(({ $variant }) => ({
       ? `
         background-image:
           linear-gradient(rgba(216, 216, 216, 0.62), rgba(216, 216, 216, 0.62)),
-          url("/assets/kamiyamacast-top-2.jpg");
+          url("${import.meta.env.BASE_URL}assets/kamiyamacast-top-2.jpg");
       `
       : ""}
 
@@ -36,7 +36,7 @@ const ServiceRoot = styled.div.attrs(({ $variant }) => ({
       ? `
         background-image:
           linear-gradient(rgba(216, 216, 216, 0.62), rgba(216, 216, 216, 0.62)),
-          url("/assets/makeyou-back.png");
+          url("${import.meta.env.BASE_URL}assets/makeyou-back.png");
       `
       : ""}
 

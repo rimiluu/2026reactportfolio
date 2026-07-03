@@ -1,3 +1,5 @@
+import { asset } from "../utils/assets";
+
 export const miniCases = {
   yousaikonkuru: {
     bodyClass: "mini-page aki-page",
@@ -9,7 +11,7 @@ export const miniCases = {
     photos: [
       {
         className: "mini-case-photo--wide",
-        src: "/assets/aki-top.png",
+        src: asset("assets/aki-top.png"),
         alt: "洋裁全国コンクールの制作記録",
         caption:
           "実物の写真と作品は手元に残っていないため、掲載画像は制作した衣装のイメージをもとに生成AIで作成したものです。",
@@ -60,18 +62,18 @@ export const miniCases = {
     photos: [
       {
         className: "mini-case-photo--wide",
-        src: "/assets/wotama-detail-1.jpg",
+        src: asset("assets/wotama-detail-1.jpg"),
         alt: "ヲタクマーケットの制作風景",
       },
       {
         afterSection: 0,
-        src: "/assets/wotama-detail-2.jpg",
+        src: asset("assets/wotama-detail-2.jpg"),
         alt: "衣装制作の記録",
       },
       {
         afterSection: 1,
         className: "mini-case-photo--narrow",
-        src: "/assets/wotama-detail-3.jpg",
+        src: asset("assets/wotama-detail-3.jpg"),
         alt: "ヲタクマーケット当日の様子",
       },
     ],
@@ -121,18 +123,18 @@ export const miniCases = {
     photos: [
       {
         className: "mini-case-photo--wide",
-        src: "/assets/miso-detail-1.jpg",
+        src: asset("assets/miso-detail-1.jpg"),
         alt: "着物トートバッグの制作イメージ",
       },
       {
         afterSection: 0,
-        src: "/assets/miso-detail-2.jpg",
+        src: asset("assets/miso-detail-2.jpg"),
         alt: "トートバッグのディテール",
       },
       {
         afterSection: 1,
         className: "mini-case-photo--narrow",
-        src: "/assets/miso-detail-3.jpg",
+        src: asset("assets/miso-detail-3.jpg"),
         alt: "着物生地の質感",
       },
     ],

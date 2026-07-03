@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { sectionHeading } from "../sharedStyles";
+import { asset } from "../../../utils/assets";
 
 const ProblemRoot = styled.div.attrs({ className: "problem", "data-reveal": "" })`
   display: grid;
@@ -66,7 +67,7 @@ export function ProblemSection({ problems }) {
       <ProblemList>
         {problems.map(([heading, text]) => (
           <div key={heading}>
-            <img className="thumb" src="/assets/hitokage-img.png" alt="" />
+            <img className="thumb" src={asset("assets/hitokage-img.png")} alt="" />
             <p>
               <strong>{heading}</strong>
               <br />

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { asset } from "../../../utils/assets";
 
 const HeroRoot = styled.div.attrs({ className: "hero", "data-reveal": "" })`
   display: grid;
@@ -55,7 +56,7 @@ const MobileHeroArt = styled.div.attrs({ className: "mobile-hero-art" })`
       bottom: clamp(66px, 8vh, 92px);
       width: min(48vw, 226px);
       height: clamp(30px, 7vw, 42px);
-      background-image: url("/assets/type-name.svg");
+      background-image: url("${import.meta.env.BASE_URL}assets/type-name.svg")});
       background-repeat: no-repeat;
       background-position: right center;
       background-size: contain;
@@ -228,23 +229,23 @@ export function Hero() {
   return (
     <HeroRoot>
       <MobileHeroArt aria-hidden="true">
-        <MobileHeroLogo src="/assets/mobile-logo.png" alt="" />
-        <MobileHeroYear src="/assets/mobile-year.png" alt="" />
+        <MobileHeroLogo src={asset("assets/mobile-logo.png")} alt="" />
+        <MobileHeroYear src={asset("assets/mobile-year.png")} alt="" />
       </MobileHeroArt>
 
       <DesktopHeroContent>
         <Intro>
           <Kana>
-            <img src="/assets/type-name.svg" alt="いとう りみ" />
+            <img src={asset("assets/type-name.svg")} alt="いとう りみ" />
           </Kana>
           <h1>
             <span className="sr-only">PORTFOLIO</span>
-            <img src="/assets/type-portfolio.svg" alt="" aria-hidden="true" />
+            <img src={asset("assets/type-portfolio.svg")} alt="" aria-hidden="true" />
           </h1>
           <Tags>Book&nbsp;&nbsp; UI/UX&nbsp;&nbsp; Media</Tags>
         </Intro>
         <Years aria-label="Portfolio period">
-          <img src="/assets/type-years.svg" alt="2024 2026" />
+          <img src={asset("assets/type-years.svg")} alt="2024 2026" />
         </Years>
       </DesktopHeroContent>
     </HeroRoot>

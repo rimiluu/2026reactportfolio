@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { asset } from "../../../utils/assets";
 
 const AboutRoot = styled.div.attrs({ className: "about", "data-reveal": "" })`
   display: grid;
@@ -69,11 +70,11 @@ const Kana = styled.p.attrs({ className: "kana" })`
 export function About() {
   return (
     <AboutRoot>
-      <Photo src="/assets/face.png" alt="" />
+      <Photo src={asset("assets/face.png")} alt="" />
       <Profile>
         <Eyebrow>神山まるごと高専3年</Eyebrow>
         <Kana>
-          <img src="/assets/type-name.svg" alt="いとう りみ" />
+          <img src={asset("assets/type-name.svg")} alt="いとう りみ" />
         </Kana>
         <p>
           神山まるごと高専で、Web制作やUI/UXデザイン、企画づくりに取り組んでいます。本や地域、音声など、身近にあるものを人に届けるWebアプリ「ホンノバ」、健康情報をToDoに変えるUI「MAKE YOU」、Podcastメディア「KamiyamaCast」の運用などを通して、情報や体験を見つけやすく届けることを考えています。

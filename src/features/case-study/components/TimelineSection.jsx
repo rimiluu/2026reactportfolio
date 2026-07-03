@@ -6,7 +6,7 @@ const ProcessRoot = styled.div.attrs({ className: "process honnova-process", "da
   isolation: isolate;
   min-height: calc(100svh - var(--header-height));
   padding: 80px clamp(70px, 10vw, 220px);
-  background: #ffffff url("/assets/honnoba-aws.png") center / cover no-repeat;
+  background: #ffffff url("${import.meta.env.BASE_URL}assets/honnoba-aws.png") center / cover no-repeat;
   border-bottom: 1px solid ${({ theme }) => theme.colors.line};
   overflow: hidden;
   scroll-snap-align: start;

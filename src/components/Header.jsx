@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { usePageContext } from "../context/PageContext";
 import { navItems } from "../data/navigation";
+import { asset } from "../utils/assets";
 
 const Topbar = styled.header.attrs({ className: "topbar" })`
   position: sticky;
@@ -114,7 +115,7 @@ export function Header() {
       <Brand to="/" aria-label="Portfolio top">
         <SrOnly>PORTFOLIO</SrOnly>
         <BrandText>PORTFOLIO</BrandText>
-        <BrandLogo src="/assets/type-portfolio.svg" alt="" aria-hidden="true" />
+        <BrandLogo src={asset("assets/type-portfolio.svg")} alt="" aria-hidden="true" />
       </Brand>
       <Nav aria-label="Primary navigation">
         {navItems.map((item) => (

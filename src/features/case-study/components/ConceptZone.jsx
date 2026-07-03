@@ -22,7 +22,7 @@ const ConceptRoot = styled.div.attrs(({ $variant }) => ({
   ${({ $variant }) =>
     $variant === "honnova-concept"
       ? `
-        background: #ffffff url("/assets/honnnoba-top-2.png") center / cover no-repeat;
+        background: #ffffff url("${import.meta.env.BASE_URL}assets/honnnoba-top-2.png") center / cover no-repeat;
 
         &::before {
           content: "";
@@ -38,7 +38,7 @@ const ConceptRoot = styled.div.attrs(({ $variant }) => ({
   ${({ $variant }) =>
     $variant === "cast-concept"
       ? `
-        background: #ffffff url("/assets/kamiyamacast-top-2.jpg") center / cover no-repeat;
+        background: #ffffff url("${import.meta.env.BASE_URL}assets/kamiyamacast-top-2.jpg") center / cover no-repeat;
 
         &::before {
           content: "";
@@ -54,7 +54,7 @@ const ConceptRoot = styled.div.attrs(({ $variant }) => ({
   ${({ $variant }) =>
     $variant === "make-concept"
       ? `
-        background: #ffffff url("/assets/makeyou-back.png") center / cover no-repeat;
+        background: #ffffff url("${import.meta.env.BASE_URL}assets/makeyou-back.png") center / cover no-repeat;
 
         &::before {
           content: "";
