@@ -48,7 +48,23 @@ const Profile = styled.div.attrs({ className: "profile" })`
   }
 `;
 
+const Eyebrow = styled.p.attrs({ className: "eyebrow" })`
+  margin: 0 0 8px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+`;
 
+const Kana = styled.p.attrs({ className: "kana" })`
+  margin: 0 0 clamp(24px, 3.2vh, 48px);
+
+  img {
+    display: block;
+    width: clamp(250px, 26vw, 500px);
+    max-width: 100%;
+    height: auto;
+  }
+`;
 
 export function About() {
   return (

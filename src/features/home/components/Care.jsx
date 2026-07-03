@@ -81,7 +81,12 @@ const CareFuture = styled.p.attrs({ className: "care-future" })`
   border-top: 1px solid ${({ theme }) => theme.colors.line};
 `;
 
-
+const Eyebrow = styled.p.attrs({ className: "eyebrow" })`
+  margin: 0 0 8px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+`;
 
 export function Care() {
   return (
