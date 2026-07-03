@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { Layout } from "./components/Layout";
 import { PageProvider } from "./context/PageContext";
@@ -94,6 +94,7 @@ const legacyRedirects = [
 
 export function App() {
   return (
+    <BrowserRouter>
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Routes>
@@ -106,5 +107,6 @@ export function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </ThemeProvider>
+    </BrowserRouter>
   );
 }
