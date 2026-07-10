@@ -69,7 +69,7 @@ const Kana = styled.p.attrs({ className: "kana" })`
 
 export function About() {
   return (
-    <AboutRoot>
+    <AboutRoot id="about">
       <Photo src={asset("assets/face.png")} alt="" />
       <Profile>
         <Eyebrow>神山まるごと高専3年</Eyebrow>

@@ -9,6 +9,7 @@ import { usePageMeta } from "./hooks/usePageMeta";
 import { useRevealOnScroll } from "./hooks/useRevealOnScroll";
 import { useScrollProgress } from "./hooks/useScrollProgress";
 import { CaseStudyPage } from "./pages/CaseStudyPage";
+import { ContactPage } from "./pages/ContactPage";
 import { Home } from "./pages/Home";
 import { MiniCasePage } from "./pages/MiniCasePage";
 import { NotFound } from "./pages/NotFound";
@@ -21,6 +22,12 @@ const pageDefaults = {
     title: "いとう りみ Portfolio",
     bodyClass: "home-page",
   },
+};
+
+const contactPage = {
+  id: "contact",
+  title: "Contact | いとう りみ Portfolio",
+  bodyClass: "contact-page",
 };
 
 const notFoundPage = {
@@ -59,6 +66,7 @@ function PortfolioRoute({ page, element }) {
 
 const routePages = [
   { path: "/", page: pageDefaults.home, element: <Home /> },
+  { path: "/contact", page: contactPage, element: <ContactPage /> },
   ...Object.entries(caseStudies).map(([id, page]) => ({
     path: `/${id}`,
     page: { id, ...page },

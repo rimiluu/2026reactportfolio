@@ -38,12 +38,13 @@ export const baseCss = `
   }
 
   @media (min-width: 901px) {
-    html:not(:has(body.home-page)) {
+    html:not(:has(body.home-page)):not(:has(body.contact-page)) {
       scroll-padding-top: var(--header-height);
       scroll-snap-type: y mandatory;
     }
 
-    html:has(body.home-page) {
+    html:has(body.home-page),
+    html:has(body.contact-page) {
       scroll-padding-top: 0;
       scroll-snap-type: none;
     }

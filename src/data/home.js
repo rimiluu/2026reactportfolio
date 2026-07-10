@@ -57,9 +57,19 @@ export const skillItems = [
   },
 ];
 
+export const workFilters = [
+  { id: "all", label: "All" },
+  { id: "book", label: "Book" },
+  { id: "uiux", label: "UI/UX" },
+  { id: "media", label: "Media" },
+  { id: "clothes", label: "Clothes" },
+  { id: "product", label: "Product" },
+];
+
 export const workItems = [
   {
     className: "item-1",
+    categories: ["book", "uiux"],
     href: "/honnova",
     numberImage: asset("assets/type-01.svg"),
     numberAlt: "01",
@@ -70,6 +80,7 @@ export const workItems = [
   },
   {
     className: "item-2",
+    categories: ["uiux"],
     href: "/makeyou",
     numberImage: asset("assets/type-02.svg"),
     numberAlt: "02",
@@ -81,6 +92,7 @@ export const workItems = [
   },
   {
     className: "item-3",
+    categories: ["media"],
     href: "/kamiyamacast",
     numberImage: asset("assets/type-03.svg"),
     numberAlt: "03",
@@ -91,6 +103,7 @@ export const workItems = [
   },
   {
     className: "item-4",
+    categories: ["clothes"],
     href: "/yousaikonkuru",
     numberImage: asset("assets/type-04.svg"),
     numberAlt: "04",
@@ -101,6 +114,7 @@ export const workItems = [
   },
   {
     className: "item-5",
+    categories: ["clothes"],
     href: "/cospre2024",
     numberImage: asset("assets/05-black.svg"),
     numberAlt: "05",
@@ -111,6 +125,7 @@ export const workItems = [
   },
   {
     className: "item-6",
+    categories: ["product", "clothes"],
     href: "/miso",
     numberImage: asset("assets/06-black.png"),
     numberAlt: "06",

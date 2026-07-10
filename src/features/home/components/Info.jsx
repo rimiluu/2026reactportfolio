@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { contactItems } from "../../../data/contact";
 import { skillItems } from "../../../data/home";
 
 const InfoRoot = styled.div.attrs({ className: "info", "data-reveal": "" })`
@@ -98,10 +99,17 @@ const ContactRoot = styled(InfoPanel).attrs({ className: "contact" })`
 
   dl {
     display: grid;
-    grid-template-columns: 120px minmax(260px, 1fr);
-    gap: 42px 72px;
+    grid-template-columns: 1fr;
+    gap: 34px;
     align-items: baseline;
     margin: 0;
+  }
+
+  dl > div {
+    display: grid;
+    grid-template-columns: 120px minmax(260px, 1fr);
+    gap: 72px;
+    align-items: baseline;
   }
 
   dt {
@@ -122,12 +130,20 @@ const ContactRoot = styled(InfoPanel).attrs({ className: "contact" })`
     word-break: normal;
   }
 
+  dd span {
+    display: block;
+  }
+
   @media (max-width: 900px) {
     border-top: 1px solid ${({ theme }) => theme.colors.line};
 
     dl {
+      gap: 30px;
+    }
+
+    dl > div {
       grid-template-columns: minmax(80px, 120px) minmax(0, 1fr);
-      gap: 32px 42px;
+      gap: 42px;
     }
 
     dd {
@@ -186,20 +202,20 @@ function Contact() {
     <ContactRoot>
       <h2>Contact</h2>
       <dl>
-        <dt>Address</dt>
-        <dd>
-          〒771-3310
-          <br />
-          徳島県名西郡神山町神領字西上角175-1
-          <br />
-          神山まるごと高専寮
-        </dd>
-        <dt>Mail</dt>
-        <dd>
-          <a href="mailto:razeria02@gmail.com">razeria02@gmail.com</a>
-        </dd>
-        <dt>Github</dt>
-        <dd>rimiluu</dd>
+        {contactItems.map((item) => (
+          <div key={item.label}>
+            <dt>{item.label}</dt>
+            <dd>
+              {item.href ? (
+                <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined}>
+                  {item.value}
+                </a>
+              ) : (
+                item.lines.map((line) => <span key={line}>{line}</span>)
+              )}
+            </dd>
+          </div>
+        ))}
       </dl>
     </ContactRoot>
   );

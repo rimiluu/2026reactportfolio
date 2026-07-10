@@ -1,8 +1,12 @@
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { workItems } from "../../../data/home";
+import { workFilters, workItems } from "../../../data/home";
 
-const WorkMapRoot = styled.div.attrs({ className: "map", "data-reveal": "" })`
+const WorkMapRoot = styled.div.attrs(({ $isFiltered }) => ({
+  className: ["map", $isFiltered ? "map--filtered" : ""].filter(Boolean).join(" "),
+  "data-reveal": "",
+}))`
   display: grid;
   grid-template-columns: minmax(360px, 1fr) minmax(360px, 1fr);
   grid-auto-rows: max-content;
@@ -16,13 +20,18 @@ const WorkMapRoot = styled.div.attrs({ className: "map", "data-reveal": "" })`
   padding: clamp(70px, 10vh, 130px) clamp(90px, 11vw, 220px) clamp(100px, 13vh, 180px);
   overflow: visible;
 
-  h2 {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    margin: 0 0 clamp(64px, 8vh, 110px);
-    font-size: clamp(27px, 2.1vw, 44px);
-    line-height: 1;
-    letter-spacing: 0.12em;
+  &.map--filtered {
+    grid-template-columns: repeat(2, minmax(280px, 520px));
+    justify-content: center;
+    row-gap: clamp(72px, 10vh, 120px);
+  }
+
+  &.map--filtered .map-item {
+    grid-column: auto;
+    grid-row: auto;
+    justify-self: center;
+    width: min(100%, 520px);
+    margin-top: 0;
   }
 
   .item-1 {
@@ -94,10 +103,8 @@ const WorkMapRoot = styled.div.attrs({ className: "map", "data-reveal": "" })`
     min-height: auto;
     padding: 76px 28px 100px;
 
-    h2 {
-      margin: 0 0 18px;
-      font-size: clamp(24px, 7vw, 34px);
-      letter-spacing: 0.1em;
+    &.map--filtered {
+      grid-template-columns: 1fr;
     }
 
     .item-1,
@@ -124,6 +131,69 @@ const WorkMapRoot = styled.div.attrs({ className: "map", "data-reveal": "" })`
 
   @media (max-width: 380px) {
     padding-inline: 18px;
+  }
+`;
+
+const WorkMapIntro = styled.div`
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 64px);
+  margin: 0 0 clamp(64px, 8vh, 110px);
+
+  h2 {
+    margin: 0;
+    font-size: clamp(27px, 2.1vw, 44px);
+    line-height: 1;
+    letter-spacing: 0.12em;
+  }
+
+  @media (max-width: 900px) {
+    display: grid;
+    gap: 24px;
+    margin-bottom: 18px;
+
+    h2 {
+      font-size: clamp(24px, 7vw, 34px);
+      letter-spacing: 0.1em;
+    }
+  }
+`;
+
+const FilterList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+
+  @media (max-width: 900px) {
+    justify-content: flex-start;
+  }
+`;
+
+const FilterButton = styled.button`
+  min-height: 38px;
+  padding: 0 14px;
+  color: ${({ $active, theme }) => ($active ? theme.colors.paper : theme.colors.ink)};
+  font: inherit;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  background: ${({ $active, theme }) => ($active ? theme.colors.ink : "transparent")};
+  border: 1px solid ${({ theme }) => theme.colors.ink};
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &:focus-visible {
+    outline: 3px solid ${({ theme }) => theme.colors.line};
+    outline-offset: 3px;
   }
 `;
 
@@ -241,15 +311,37 @@ function WorkMapItem({ item }) {
 }
 
 export function WorkMap() {
+  const [activeFilter, setActiveFilter] = useState("all");
+
+  const filteredItems = useMemo(() => {
+    if (activeFilter === "all") return workItems;
+    return workItems.filter((item) => item.categories.includes(activeFilter));
+  }, [activeFilter]);
+
   return (
-    <WorkMapRoot>
-      <h2>これまでやってきたこと</h2>
-      {workItems.map((item) => (
+    <WorkMapRoot $isFiltered={activeFilter !== "all"} id="works">
+      <WorkMapIntro>
+        <h2>これまでやってきたこと</h2>
+        <FilterList aria-label="作品カテゴリ">
+          {workFilters.map((filter) => (
+            <FilterButton
+              $active={filter.id === activeFilter}
+              aria-pressed={filter.id === activeFilter}
+              key={filter.id}
+              onClick={() => setActiveFilter(filter.id)}
+              type="button"
+            >
+              {filter.label}
+            </FilterButton>
+          ))}
+        </FilterList>
+      </WorkMapIntro>
+
+      {filteredItems.map((item) => (
         <WorkMapItem key={item.href} item={item} />
       ))}
     </WorkMapRoot>
   );
 }
-
 
 
