@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { usePageContext } from "../context/PageContext";
 
-const SiteFooter = styled.footer.attrs({ className: "footer" })`
+const SiteFooter = styled.footer.attrs({ className: "footer", "data-reveal": "" })`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -13,13 +13,13 @@ const SiteFooter = styled.footer.attrs({ className: "footer" })`
   border-top: 1px solid ${({ theme }) => theme.colors.line};
   font-weight: 800;
 
-  body:not(.home-page) & {
+  body:not(.home-page):not(.mini-page) & {
     scroll-snap-align: end;
     scroll-snap-stop: always;
   }
 
   @media (min-width: 901px) {
-    body:not(.home-page) & {
+    body:not(.home-page):not(.mini-page) & {
       min-height: clamp(120px, 16vh, 180px);
     }
   }
@@ -29,7 +29,7 @@ const SiteFooter = styled.footer.attrs({ className: "footer" })`
     align-items: flex-start;
     gap: 8px;
     min-height: 96px;
-    padding: 30px 22px;
+    padding: 30px var(--mobile-gutter);
   }
 `;
 

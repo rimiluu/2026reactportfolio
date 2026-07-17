@@ -25,7 +25,7 @@ const InfoPanel = styled.div`
   }
 
   @media (max-width: 900px) {
-    padding: 56px 22px;
+    padding: var(--mobile-section-space) var(--mobile-gutter);
   }
 `;
 
@@ -36,7 +36,7 @@ const SkillList = styled.div.attrs({ className: "skill-list" })`
   margin: 0;
 `;
 
-const SkillArticle = styled.section.attrs({ className: "skill-item" })`
+const SkillArticle = styled.section.attrs({ className: "skill-item", "data-motion": "30" })`
   display: grid;
   gap: 10px;
 
@@ -142,13 +142,14 @@ const ContactRoot = styled(InfoPanel).attrs({ className: "contact" })`
     }
 
     dl > div {
-      grid-template-columns: minmax(80px, 120px) minmax(0, 1fr);
-      gap: 42px;
+      grid-template-columns: minmax(72px, 0.42fr) minmax(0, 1fr);
+      gap: clamp(20px, 7vw, 36px);
     }
 
     dd {
       white-space: normal;
-      word-break: break-word;
+      overflow-wrap: anywhere;
+      word-break: normal;
     }
   }
 `;
@@ -157,7 +158,7 @@ const ContactRoot = styled(InfoPanel).attrs({ className: "contact" })`
 
 function ToolIcon({ tool }) {
   return (
-    <figure>
+    <figure data-motion="32">
       <figcaption>{tool.label}</figcaption>
       {tool.icon ? <img src={tool.icon} alt={tool.alt ?? tool.label} /> : null}
     </figure>
@@ -168,7 +169,7 @@ function SkillItem({ item }) {
   return (
     <SkillArticle>
       <SkillHead>
-        <h3>{item.title}</h3>
+        <h3 data-motion="31">{item.title}</h3>
         {item.tools.length ? (
           <ToolIcons>
             {item.tools.map((tool) => (
@@ -178,7 +179,7 @@ function SkillItem({ item }) {
         ) : null}
       </SkillHead>
       {item.descriptions.map((description) => (
-        <p key={description}>{description}</p>
+        <p data-motion="33" key={description}>{description}</p>
       ))}
     </SkillArticle>
   );
@@ -187,7 +188,7 @@ function SkillItem({ item }) {
 function Skills() {
   return (
     <SkillsRoot>
-      <h2>Skills &amp; Tools</h2>
+      <h2 data-motion="29">Skills &amp; Tools</h2>
       <SkillList>
         {skillItems.map((item) => (
           <SkillItem key={item.title} item={item} />
@@ -200,14 +201,14 @@ function Skills() {
 function Contact() {
   return (
     <ContactRoot>
-      <h2>Contact</h2>
+      <h2 data-motion="34">Contact</h2>
       <dl>
         {contactItems.map((item) => (
-          <div key={item.label}>
+          <div data-motion="35" key={item.label}>
             <dt>{item.label}</dt>
             <dd>
               {item.href ? (
-                <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined}>
+                <a data-motion="36" href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined}>
                   {item.value}
                 </a>
               ) : (

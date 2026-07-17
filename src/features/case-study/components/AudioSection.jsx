@@ -51,12 +51,12 @@ const AudioRoot = styled.div.attrs({ className: "audio-section", "data-reveal": 
     grid-template-columns: 1fr;
     gap: 28px;
     min-height: auto;
-    padding: 72px 22px;
+    padding: 72px var(--mobile-gutter);
   }
 
   @media (max-width: 560px) {
     gap: 24px;
-    padding: 64px 22px;
+    padding: var(--mobile-section-space) var(--mobile-gutter);
 
     h3 {
       font-size: 22px;
@@ -78,12 +78,10 @@ const AudioCopy = styled.div.attrs({ className: "audio-section__copy" })`
 
 const AudioCard = styled.div.attrs({ className: "audio-card" })`
   display: grid;
-  gap: 14px;
   min-width: 0;
-  padding: clamp(18px, 2.5vw, 34px);
-  border: 1px solid ${({ theme }) => theme.colors.line};
-  border-radius: 18px;
-  background: ${({ theme }) => theme.colors.paper};
+  padding: 0;
+  border: 0;
+  background: transparent;
 
   iframe {
     display: block;
@@ -99,8 +97,7 @@ const AudioCard = styled.div.attrs({ className: "audio-card" })`
   }
 
   @media (max-width: 560px) {
-    padding: 16px;
-    border-radius: 14px;
+    padding: 0;
   }
 `;
 
@@ -110,14 +107,14 @@ export function AudioSection({ audio }) {
   return (
     <AudioRoot>
       <AudioCopy>
-        <h3>{audio.heading}</h3>
-        <p>{audio.text}</p>
-        <a className="text-link" href={audio.link} target="_blank" rel="noreferrer">
+        <h3 data-motion="61">{audio.heading}</h3>
+        <p data-motion="62">{audio.text}</p>
+        <a className="text-link" data-motion="63" href={audio.link} target="_blank" rel="noreferrer">
           Spotifyで番組を開く
         </a>
       </AudioCopy>
 
-      <AudioCard>
+      <AudioCard data-motion="64">
         <iframe
           title="夢みる朗読をSpotifyで聴く"
           src={audio.embed}

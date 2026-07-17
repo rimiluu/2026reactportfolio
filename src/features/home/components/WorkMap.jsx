@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { animate, stagger } from "animejs";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { workFilters, workItems } from "../../../data/home";
@@ -6,6 +7,7 @@ import { workFilters, workItems } from "../../../data/home";
 const WorkMapRoot = styled.div.attrs(({ $isFiltered }) => ({
   className: ["map", $isFiltered ? "map--filtered" : ""].filter(Boolean).join(" "),
   "data-reveal": "",
+  "data-motion": "20",
 }))`
   display: grid;
   grid-template-columns: minmax(360px, 1fr) minmax(360px, 1fr);
@@ -101,7 +103,7 @@ const WorkMapRoot = styled.div.attrs(({ $isFiltered }) => ({
     grid-template-columns: 1fr;
     gap: 96px;
     min-height: auto;
-    padding: 76px 28px 100px;
+    padding: 76px var(--mobile-gutter) 100px;
 
     &.map--filtered {
       grid-template-columns: 1fr;
@@ -120,18 +122,48 @@ const WorkMapRoot = styled.div.attrs(({ $isFiltered }) => ({
       margin-top: 0;
     }
 
+    .map-item {
+      display: grid;
+      grid-template-columns: clamp(68px, 20vw, 88px) minmax(0, 1fr);
+      gap: 12px 14px;
+      align-items: end;
+    }
+
+    .map-item strong {
+      position: static;
+      grid-column: 1;
+      grid-row: 1;
+      align-self: end;
+      width: 100%;
+    }
+
     .map-item span,
     .item-5 span,
     .item-6 span {
-      left: clamp(60px, 19vw, 108px);
-      max-width: none;
-      font-size: clamp(21px, 6vw, 32px);
+      position: static;
+      grid-column: 2;
+      grid-row: 1;
+      align-self: end;
+      width: auto;
+      max-width: 100%;
+      font-size: clamp(18px, 5.2vw, 28px);
+      overflow-wrap: anywhere;
+    }
+
+    .map-item .thumb,
+    .map-item .map-item-desc {
+      grid-column: 1 / -1;
+    }
+
+    .map-item .thumb {
+      grid-row: 2;
+    }
+
+    .map-item .map-item-desc {
+      grid-row: 3;
     }
   }
 
-  @media (max-width: 380px) {
-    padding-inline: 18px;
-  }
 `;
 
 const WorkMapIntro = styled.div`
@@ -170,6 +202,47 @@ const FilterList = styled.div`
 
   @media (max-width: 900px) {
     justify-content: flex-start;
+  }
+`;
+
+const FilterGroup = styled.fieldset`
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+`;
+
+const FilterLegend = styled.legend`
+  width: 100%;
+  margin: 0 0 12px;
+  padding: 0;
+  color: ${({ theme }) => theme.colors.muted};
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1.3;
+  letter-spacing: 0.12em;
+  text-align: right;
+
+  strong {
+    color: ${({ theme }) => theme.colors.ink};
+  }
+
+  @media (max-width: 900px) {
+    text-align: left;
+  }
+`;
+
+const FilterResult = styled.p`
+  margin: 10px 0 0;
+  color: ${({ theme }) => theme.colors.muted};
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-align: right;
+
+  @media (max-width: 900px) {
+    text-align: left;
   }
 `;
 
@@ -272,23 +345,26 @@ const WorkLink = styled(Link).attrs(({ $itemClassName }) => ({
 
   @media (max-width: 900px) {
     strong {
-      left: -18px;
-      top: -44px;
-      width: clamp(78px, 24vw, 112px);
+      position: static;
+      left: auto;
+      top: auto;
+      width: 100%;
     }
 
     span {
-      left: clamp(60px, 19vw, 108px);
-      top: -20px;
-      width: min(72vw, 360px);
-      max-width: none;
-      font-size: clamp(21px, 6vw, 32px);
+      position: static;
+      left: auto;
+      top: auto;
+      width: auto;
+      max-width: 100%;
+      font-size: clamp(18px, 5.2vw, 28px);
       line-height: 1.18;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.08em;
+      overflow-wrap: anywhere;
     }
 
     .map-item-desc {
-      margin-top: 14px;
+      margin-top: 2px;
       font-size: 13px;
       line-height: 1.75;
     }
@@ -297,44 +373,86 @@ const WorkLink = styled(Link).attrs(({ $itemClassName }) => ({
 
 function WorkMapItem({ item }) {
   const thumbClassName = ["thumb", item.thumbnailClassName].filter(Boolean).join(" ");
+  const itemNumber = Number(item.className.replace(/\D/g, ""));
+  const itemMotion = itemNumber % 2 === 0 ? "23 28" : "23";
 
   return (
-    <WorkLink $itemClassName={item.className} to={item.href}>
-      <strong>
+    <WorkLink $itemClassName={item.className} data-motion={itemMotion} to={item.href}>
+      <strong data-motion="24">
         <img src={item.numberImage} alt={item.numberAlt} />
       </strong>
-      <span>{item.title}</span>
-      <img className={thumbClassName} src={item.thumbnail} alt={item.thumbnailAlt} />
-      <p className="map-item-desc">{item.description}</p>
+      <span data-motion="25">{item.title}</span>
+      <img className={thumbClassName} data-motion="26" src={item.thumbnail} alt={item.thumbnailAlt} />
+      <p className="map-item-desc" data-motion="27">{item.description}</p>
     </WorkLink>
   );
 }
 
 export function WorkMap() {
   const [activeFilter, setActiveFilter] = useState("all");
+  const mapRef = useRef(null);
+  const hasFilteredRef = useRef(false);
 
   const filteredItems = useMemo(() => {
     if (activeFilter === "all") return workItems;
     return workItems.filter((item) => item.categories.includes(activeFilter));
   }, [activeFilter]);
 
+  useEffect(() => {
+    if (!hasFilteredRef.current) {
+      hasFilteredRef.current = true;
+      return undefined;
+    }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+
+    const items = mapRef.current?.querySelectorAll(".map-item");
+    const activeButton = mapRef.current?.querySelector("button[aria-pressed='true']");
+    const animations = [];
+
+    if (items?.length) {
+      animations.push(animate(items, {
+        opacity: [0, 1],
+        y: [28, 0],
+        scale: [0.97, 1],
+        delay: stagger(80),
+        duration: 620,
+        ease: "outExpo",
+      }));
+    }
+
+    if (activeButton) {
+      animations.push(animate(activeButton, {
+        scale: [0.9, 1],
+        duration: 360,
+        ease: "outBack(1.5)",
+      }));
+    }
+
+    return () => animations.forEach((animation) => animation.cancel());
+  }, [activeFilter]);
+
   return (
-    <WorkMapRoot $isFiltered={activeFilter !== "all"} id="works">
+    <WorkMapRoot $isFiltered={activeFilter !== "all"} id="works" ref={mapRef}>
       <WorkMapIntro>
-        <h2>これまでやってきたこと</h2>
-        <FilterList aria-label="作品カテゴリ">
-          {workFilters.map((filter) => (
-            <FilterButton
-              $active={filter.id === activeFilter}
-              aria-pressed={filter.id === activeFilter}
-              key={filter.id}
-              onClick={() => setActiveFilter(filter.id)}
-              type="button"
-            >
-              {filter.label}
-            </FilterButton>
-          ))}
-        </FilterList>
+        <h2 data-motion="21">これまでやってきたこと</h2>
+        <FilterGroup>
+          <FilterLegend><strong>FILTER</strong> / 作品を絞り込む</FilterLegend>
+          <FilterList>
+            {workFilters.map((filter) => (
+              <FilterButton
+                $active={filter.id === activeFilter}
+                data-motion="22"
+                aria-pressed={filter.id === activeFilter}
+                key={filter.id}
+                onClick={() => setActiveFilter(filter.id)}
+                type="button"
+              >
+                {filter.label}
+              </FilterButton>
+            ))}
+          </FilterList>
+          <FilterResult aria-live="polite">{filteredItems.length}件を表示</FilterResult>
+        </FilterGroup>
       </WorkMapIntro>
 
       {filteredItems.map((item) => (
@@ -343,5 +461,3 @@ export function WorkMap() {
     </WorkMapRoot>
   );
 }
-
-

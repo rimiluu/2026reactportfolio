@@ -20,8 +20,11 @@ const Topbar = styled.header.attrs({ className: "topbar" })`
   @media (max-width: 900px) {
     flex-direction: row;
     gap: 18px;
+    width: 100%;
+    max-width: 100%;
     min-height: 76px;
-    padding: 0 clamp(16px, 4.5vw, 26px);
+    padding: 0 var(--mobile-gutter);
+    overflow: hidden;
   }
 `;
 
@@ -63,6 +66,8 @@ const BrandText = styled.strong.attrs({ className: "brand-text" })`
 
   @media (max-width: 900px) {
     display: block;
+    font-size: clamp(13px, 3.8vw, 16px);
+    letter-spacing: 0.04em;
   }
 `;
 
@@ -70,21 +75,47 @@ const SrOnly = styled.span.attrs({ className: "sr-only" })``;
 
 const Nav = styled.nav.attrs({ className: "nav" })`
   display: flex;
+  align-items: center;
+  justify-content: flex-end;
   gap: clamp(12px, 2.2vw, 34px);
   font-size: clamp(12px, 0.95vw, 15px);
   font-weight: 700;
   letter-spacing: 0.2em;
 
+  a {
+    display: flex;
+    align-items: center;
+    min-height: 22px;
+  }
+
+  a:last-child {
+    padding-left: clamp(12px, 1.4vw, 22px);
+    border-left: 1px solid ${({ theme }) => theme.colors.line};
+  }
+
   @media (max-width: 900px) {
-    flex: 0 0 auto;
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 100%;
     width: auto;
-    justify-content: flex-start;
-    gap: clamp(10px, 3.2vw, 16px);
+    justify-content: flex-end;
+    gap: clamp(8px, 2.5vw, 12px);
+    margin-left: auto;
     overflow-x: auto;
+    overflow-y: hidden;
     padding-bottom: 0;
-    font-size: clamp(11px, 3.1vw, 13px);
-    letter-spacing: 0.12em;
+    font-size: clamp(10px, 2.8vw, 12px);
+    letter-spacing: 0.08em;
     white-space: nowrap;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    a:last-child {
+      padding-left: clamp(8px, 2.5vw, 12px);
+    }
   }
 `;
 
@@ -119,7 +150,11 @@ export function Header() {
       </Brand>
       <Nav aria-label="Primary navigation">
         {navItems.map((item) => (
-          <NavLink key={item.href} to={item.href}>
+          <NavLink
+            key={item.href}
+            to={item.href}
+            data-transition={item.label === "About" || item.label === "Works" ? "instant" : undefined}
+          >
             {item.label}
           </NavLink>
         ))}

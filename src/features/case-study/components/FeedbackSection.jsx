@@ -62,6 +62,7 @@ const FeedbackBubbles = styled.div.attrs({ className: "feedback-bubbles" })`
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
     gap: 28px;
+    width: 100%;
 
     p,
     p:nth-child(2),
@@ -77,10 +78,10 @@ export function FeedbackSection({ feedback }) {
 
   return (
     <FieldRoot $variant="make-feedback">
-      <h3>Feed Back</h3>
-      <FeedbackBubbles aria-label="ユーザビリティテストで得たコメント">
+      <h3 data-motion="58">Feed Back</h3>
+      <FeedbackBubbles aria-label="ユーザビリティテストで得たコメント" data-motion="60">
         {feedback.map((item, index) => (
-          <p key={index}>{item}</p>
+          <p data-motion="59" key={index}>{item}</p>
         ))}
       </FeedbackBubbles>
     </FieldRoot>

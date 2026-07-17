@@ -2,12 +2,13 @@ import { useEffect } from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { Layout } from "./components/Layout";
+import { PageTransition } from "./components/PageTransition";
 import { PageProvider } from "./context/PageContext";
 import { caseStudies } from "./data/caseStudies";
 import { miniCases } from "./data/miniCases";
 import { usePageMeta } from "./hooks/usePageMeta";
-import { useRevealOnScroll } from "./hooks/useRevealOnScroll";
 import { useScrollProgress } from "./hooks/useScrollProgress";
+import { usePortfolioMotion } from "./motion/usePortfolioMotion";
 import { CaseStudyPage } from "./pages/CaseStudyPage";
 import { ContactPage } from "./pages/ContactPage";
 import { Home } from "./pages/Home";
@@ -54,7 +55,7 @@ function PortfolioRoute({ page, element }) {
   const scrollProgress = useScrollProgress(page.id);
 
   usePageMeta(page);
-  useRevealOnScroll(page.id);
+  usePortfolioMotion(page.id);
   useHashScroll();
 
   return (
@@ -85,11 +86,13 @@ export function App() {
     <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, "")}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Routes>
-          {routePages.map(({ path, page, element }) => (
-            <Route key={path} path={path} element={<PortfolioRoute page={page} element={element} />} />
-          ))}
-        </Routes>
+        <PageTransition>
+          <Routes>
+            {routePages.map(({ path, page, element }) => (
+              <Route key={path} path={path} element={<PortfolioRoute page={page} element={element} />} />
+            ))}
+          </Routes>
+        </PageTransition>
       </ThemeProvider>
     </BrowserRouter>
   );

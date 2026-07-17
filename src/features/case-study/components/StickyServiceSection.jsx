@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+import { animate } from "animejs";
 import styled from "styled-components";
 import { useStickyServiceSteps } from "../useStickyServiceSteps";
 
@@ -63,7 +65,7 @@ const ServiceRoot = styled.div.attrs(({ $variant }) => ({
     > .eyebrow {
       width: auto;
       margin: 0;
-      padding: 28px 22px 12px;
+      padding: 28px var(--mobile-gutter) 12px;
     }
   }
 `;
@@ -84,7 +86,7 @@ const StickyServiceBody = styled.div.attrs({ className: "sticky-service-body" })
     gap: 0;
     width: auto;
     margin: 0;
-    padding: 0 22px 42px;
+    padding: 0 0 42px;
   }
 `;
 
@@ -116,9 +118,8 @@ const ServiceFixedVisual = styled.div.attrs({ className: "service-fixed-visual" 
     top: var(--header-height);
     z-index: 3;
     min-height: auto;
-    padding: 16px 20px;
+    padding: 16px var(--mobile-gutter);
     border-right: 0;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.line};
   }
 `;
 
@@ -196,14 +197,9 @@ const ServiceStep = styled.div.attrs({ className: "service-step" })`
   min-height: clamp(560px, calc(100svh - var(--header-height) - 74px), 760px);
   padding: 0 clamp(80px, 8vw, 130px) clamp(70px, 9vh, 110px) clamp(58px, 6vw, 96px);
   background: ${({ theme }) => theme.colors.paper};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.line};
   overflow: hidden;
   scroll-snap-align: start;
   scroll-snap-stop: always;
-
-  &:last-child {
-    border-bottom: 0;
-  }
 
   .service-step__number {
     position: absolute;
@@ -240,8 +236,7 @@ const ServiceStep = styled.div.attrs({ className: "service-step" })`
 
   @media (max-width: 900px) {
     min-height: auto;
-    padding: 64px 22px 52px;
-    border-top: 1px solid ${({ theme }) => theme.colors.line};
+    padding: var(--mobile-section-space) var(--mobile-gutter) 52px;
 
     .service-step__number {
       top: 64px;
@@ -271,13 +266,48 @@ function ServiceScreen({ screen, isActive, service }) {
 
 export function StickyServiceSection({ service }) {
   const { activeStep, setStepRef, stackVariant } = useStickyServiceSteps(service);
+  const rootRef = useRef(null);
+  const hasChangedStepRef = useRef(false);
+
+  useEffect(() => {
+    if (!hasChangedStepRef.current) {
+      hasChangedStepRef.current = true;
+      return undefined;
+    }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+
+    const activeScreen = rootRef.current?.querySelector(`[data-service-image="${activeStep}"]`);
+    const activeCopy = rootRef.current?.querySelector(`[data-service-step="${activeStep}"]`);
+    if (!activeScreen) return undefined;
+
+    const animations = [
+      animate(activeScreen, {
+        opacity: [0, 1],
+        y: [18, 0],
+        scale: [0.965, 1],
+        duration: 560,
+        ease: "outExpo",
+      }),
+    ];
+
+    if (activeCopy) {
+      animations.push(animate(activeCopy.querySelectorAll("h3, p, .service-step__number"), {
+        opacity: [0.45, 1],
+        x: [14, 0],
+        duration: 430,
+        ease: "out(3)",
+      }));
+    }
+
+    return () => animations.forEach((animation) => animation.cancel());
+  }, [activeStep]);
 
   return (
-    <ServiceRoot $variant={service.className}>
-      <p className="eyebrow">{service.eyebrow}</p>
-      <StickyServiceBody>
-        <ServiceFixedVisual>
-          <ServiceScreenStack $variant={stackVariant}>
+    <ServiceRoot $variant={service.className} ref={rootRef}>
+      <p className="eyebrow" data-motion="50">{service.eyebrow}</p>
+      <StickyServiceBody data-motion="51">
+        <ServiceFixedVisual data-motion="52">
+          <ServiceScreenStack $variant={stackVariant} data-motion="53">
             {service.screens.map((screen) => (
               <ServiceScreen key={screen.id} screen={screen} isActive={screen.id === activeStep} service={service} />
             ))}
@@ -285,10 +315,10 @@ export function StickyServiceSection({ service }) {
         </ServiceFixedVisual>
         <ServiceCopy>
           {service.steps.map(([id, numberSrc, numberAlt, heading, text]) => (
-            <ServiceStep data-service-step={id} key={id} ref={setStepRef(id)}>
-              <img className="service-step__number" src={numberSrc} alt={numberAlt} />
-              <h3>{heading}</h3>
-              <p>{text}</p>
+            <ServiceStep data-motion="57" data-service-step={id} key={id} ref={setStepRef(id)}>
+              <img className="service-step__number" data-motion="54" src={numberSrc} alt={numberAlt} />
+              <h3 data-motion="55">{heading}</h3>
+              <p data-motion="56">{text}</p>
             </ServiceStep>
           ))}
         </ServiceCopy>

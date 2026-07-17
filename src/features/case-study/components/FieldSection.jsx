@@ -8,7 +8,7 @@ export const FieldRoot = styled.div.attrs(({ $variant }) => ({
 }))`
   display: grid;
   grid-template-columns: ${({ $variant }) =>
-    $variant === "make-feedback" ? "1fr" : "minmax(320px, 0.58fr) minmax(660px, 1.32fr)"};
+    $variant === "make-feedback" ? "1fr" : "minmax(340px, 0.72fr) minmax(0, 1.28fr)"};
   align-content: center;
   justify-items: center;
   gap: 0 54px;
@@ -40,8 +40,8 @@ export const FieldRoot = styled.div.attrs(({ $variant }) => ({
     display: grid;
     grid-column: 1;
     grid-row: 2;
-    grid-template-columns: minmax(150px, auto) auto;
-    gap: clamp(46px, 7vh, 82px) clamp(60px, 6vw, 100px);
+    grid-template-columns: minmax(0, 1fr) max-content;
+    gap: clamp(46px, 7vh, 82px) clamp(24px, 3vw, 48px);
     align-items: baseline;
     justify-self: center;
     width: min(100%, 620px);
@@ -49,16 +49,19 @@ export const FieldRoot = styled.div.attrs(({ $variant }) => ({
   }
 
   dt {
-    font-size: clamp(22px, 1.8vw, 36px);
+    font-size: clamp(20px, 1.6vw, 32px);
     font-weight: 800;
     white-space: nowrap;
   }
 
   dd {
     margin: 0;
-    font-size: 54px;
+    min-width: max-content;
+    font-size: clamp(36px, 4vw, 54px);
     font-weight: 900;
     letter-spacing: 0.08em;
+    overflow-wrap: normal;
+    white-space: nowrap;
   }
 
   > p {
@@ -69,7 +72,7 @@ export const FieldRoot = styled.div.attrs(({ $variant }) => ({
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
     min-height: auto;
-    padding: 64px 22px;
+    padding: var(--mobile-section-space) var(--mobile-gutter);
 
     .map-visual,
     dl,
@@ -86,9 +89,11 @@ export const FieldRoot = styled.div.attrs(({ $variant }) => ({
 
     dt {
       font-size: inherit;
+      white-space: normal;
     }
 
     dd {
+      min-width: 0;
       font-size: 24px;
     }
   }
@@ -107,19 +112,19 @@ export function FieldSection({ field }) {
 
   return (
     <FieldRoot>
-      <h3>{field.heading}</h3>
-      <img className="map-visual" src={field.image} alt={field.imageAlt} />
+      <h3 data-motion="65">{field.heading}</h3>
+      <img className="map-visual" data-motion="66" src={field.image} alt={field.imageAlt} />
       {field.stats ? (
         <dl>
           {field.stats.map(([term, detail]) => (
             <Fragment key={term}>
-              <dt>{term}</dt>
-              <dd>{detail}</dd>
+              <dt data-motion="67">{term}</dt>
+              <dd data-motion="68">{detail}</dd>
             </Fragment>
           ))}
         </dl>
       ) : null}
-      {field.text ? <p>{field.text}</p> : null}
+      {field.text ? <p data-motion="69">{field.text}</p> : null}
     </FieldRoot>
   );
 }

@@ -12,9 +12,13 @@ const ContactMain = styled.main.attrs({ className: "contact-page-main" })`
   min-height: calc(100svh - var(--header-height));
   padding: clamp(70px, 10vh, 128px) clamp(24px, 8vw, 160px) clamp(96px, 13vh, 170px);
   background: ${({ theme }) => theme.colors.paper};
+
+  @media (max-width: 900px) {
+    padding: var(--mobile-section-space) var(--mobile-gutter) 96px;
+  }
 `;
 
-const ContactShell = styled.section.attrs({ "data-reveal": "" })`
+const ContactShell = styled.section.attrs({ className: "contact-shell", "data-reveal": "" })`
   display: grid;
   gap: clamp(54px, 8vh, 104px);
   width: min(1040px, 100%);
@@ -125,6 +129,7 @@ const ContactMeta = styled.div`
     font-weight: 800;
     line-height: 1.65;
     letter-spacing: 0.08em;
+    overflow-wrap: anywhere;
   }
 
   span {
@@ -258,14 +263,14 @@ export function ContactPage() {
   return (
     <ContactMain>
       <ContactShell>
-        <ContactHero>
+        <ContactHero data-motion="80">
           <h1>CONTACT</h1>
           <p>お問い合わせ、制作や企画のご相談は下記フォームよりお願いいたします。</p>
           <p>For inquiries and project requests, please use the form below.</p>
         </ContactHero>
 
         <ContactBody>
-          <ContactNotes>
+          <ContactNotes data-motion="80">
             <h2>お問い合わせの前に</h2>
             <FaqList>
               {contactFaqItems.map((item) => (
@@ -288,16 +293,16 @@ export function ContactPage() {
             </ContactList>
           </ContactNotes>
 
-          <ContactForm onSubmit={handleSubmit}>
-            <Field>
+          <ContactForm data-motion="80" onSubmit={handleSubmit}>
+            <Field data-motion="80">
               <span>Name</span>
               <input autoComplete="name" name="name" onChange={updateField("name")} placeholder="いとう りみ" required type="text" value={form.name} />
             </Field>
-            <Field>
+            <Field data-motion="80">
               <span>E-mail</span>
               <input autoComplete="email" name="email" onChange={updateField("email")} placeholder="mail@example.com" required type="email" value={form.email} />
             </Field>
-            <Field>
+            <Field data-motion="80">
               <span>Message</span>
               <textarea name="message" onChange={updateField("message")} placeholder="お問い合わせ内容をご記入ください。" required value={form.message} />
             </Field>

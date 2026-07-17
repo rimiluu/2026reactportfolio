@@ -93,25 +93,25 @@ const ConceptRoot = styled.div.attrs(({ $variant }) => ({
     grid-template-columns: 1fr;
     gap: 28px;
     min-height: auto;
-    padding: 64px 22px;
+    padding: var(--mobile-section-space) var(--mobile-gutter);
   }
 `;
 
 export function ConceptZone({ concept }) {
   return (
-    <ConceptRoot $variant={concept.className}>
-      <h3>{concept.heading}</h3>
+    <ConceptRoot $variant={concept.className} data-motion="46">
+      <h3 data-motion="47">{concept.heading}</h3>
       {concept.lines ? (
-        <p>
+        <p data-motion="48">
           {concept.lines.map((line, index) => (
-            <span key={line}>
+            <span data-motion="49" key={line}>
               {line}
               {index < concept.lines.length - 1 ? <br /> : null}
             </span>
           ))}
         </p>
       ) : (
-        <p>{concept.text}</p>
+        <p data-motion="48">{concept.text}</p>
       )}
     </ConceptRoot>
   );

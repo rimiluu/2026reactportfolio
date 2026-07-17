@@ -42,7 +42,7 @@ const FinalGridRoot = styled.div.attrs({ className: "text-grid final-grid", "dat
     grid-template-columns: 1fr;
     gap: 44px;
     min-height: auto;
-    padding-block: 64px;
+    padding: var(--mobile-section-space) var(--mobile-gutter);
   }
 `;
 
@@ -50,9 +50,9 @@ export function FinalGrid({ items }) {
   return (
     <FinalGridRoot>
       {items.map(([heading, text]) => (
-        <article key={heading}>
-          <h3>{heading}</h3>
-          <p>{text}</p>
+        <article data-motion="77" key={heading}>
+          <h3 data-motion="78">{heading}</h3>
+          <p data-motion="78">{text}</p>
         </article>
       ))}
     </FinalGridRoot>

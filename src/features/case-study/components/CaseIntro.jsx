@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const IntroLock = styled.div.attrs({ className: "honnova-intro-lock" })`
+const IntroLock = styled.div.attrs({ className: "honnova-intro-lock", "data-reveal": "" })`
   @media (min-width: 901px) {
     display: grid;
     grid-template-columns: minmax(360px, 0.78fr) minmax(620px, 1.22fr);
@@ -58,7 +58,7 @@ const LogoPanel = styled.div.attrs({ className: "honnova-logo-panel" })`
     grid-template-columns: 1fr;
     align-content: center;
     min-height: min(420px, 58svh);
-    padding: 54px 22px;
+    padding: 54px var(--mobile-gutter);
 
     > div {
       padding: 18px 0;
@@ -81,7 +81,7 @@ const OverviewPanelRoot = styled.div.attrs({ className: "honnova-overview-panel"
     display: grid;
     grid-template-columns: 1fr;
     min-height: auto;
-    padding: 42px 22px 54px;
+    padding: 42px var(--mobile-gutter) 54px;
   }
 `;
 
@@ -138,7 +138,7 @@ function OverviewPanel({ rows }) {
     <OverviewPanelRoot>
       <div>
         {rows.map(([heading, content]) => (
-          <div key={heading}>
+          <div data-motion="39" key={heading}>
             <h3>{heading}</h3>
             <p>{content}</p>
           </div>
@@ -153,8 +153,8 @@ export function CaseIntro({ caseData }) {
     <IntroLock>
       <IntroCopy>
         <LogoPanel>
-          <div>
-            <img className={caseData.logo.className} src={caseData.logo.src} alt={caseData.logo.alt} />
+          <div data-motion="38">
+            <img className={caseData.logo.className} data-motion="37" src={caseData.logo.src} alt={caseData.logo.alt} />
           </div>
         </LogoPanel>
 
@@ -164,8 +164,8 @@ export function CaseIntro({ caseData }) {
       </IntroCopy>
 
       <FixedMock aria-hidden="true">
-        {caseData.mockImages.map((src) => (
-          <img key={src} src={src} alt="" />
+        {caseData.mockImages.map((src, index) => (
+          <img data-motion={index % 2 === 1 ? "40 41" : "40"} key={src} src={src} alt="" />
         ))}
       </FixedMock>
     </IntroLock>

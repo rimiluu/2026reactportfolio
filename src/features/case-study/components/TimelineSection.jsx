@@ -36,7 +36,7 @@ const ProcessRoot = styled.div.attrs({ className: "process honnova-process", "da
 
   @media (max-width: 900px) {
     min-height: auto;
-    padding: 64px 22px;
+    padding: var(--mobile-section-space) var(--mobile-gutter);
   }
 `;
 
@@ -47,14 +47,14 @@ const Timeline = styled.div.attrs({ className: "timeline" })`
   width: min(820px, 100%);
   margin: 60px auto 0;
 
-  &::before {
-    content: "";
+  .timeline-line {
     position: absolute;
     left: 22px;
     top: 12px;
     bottom: 12px;
     width: 3px;
     background: rgba(255, 255, 255, 0.92);
+    transform-origin: center top;
   }
 
   div {
@@ -69,8 +69,7 @@ const Timeline = styled.div.attrs({ className: "timeline" })`
     font-weight: 900;
   }
 
-  span::after {
-    content: "";
+  .timeline-dot {
     position: absolute;
     left: 10px;
     top: 26px;
@@ -104,11 +103,13 @@ export function TimelineSection({ timeline }) {
 
   return (
     <ProcessRoot>
-      <h3>Process &amp; Achievement</h3>
+      <h3 data-motion="70">Process &amp; Achievement</h3>
       <Timeline>
+        <span className="timeline-line" data-motion="71" aria-hidden="true" />
         {timeline.map(([year, text]) => (
-          <div key={year}>
+          <div data-motion="72" key={year}>
             <span>{year}</span>
+            <i className="timeline-dot" data-motion="73" aria-hidden="true" />
             <p>{text}</p>
           </div>
         ))}

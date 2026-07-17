@@ -18,7 +18,7 @@ const MiniInner = styled.div.attrs({ className: "mini-case-inner" })`
   padding: clamp(72px, 10vh, 132px) 0 clamp(96px, 13vh, 180px);
 
   @media (max-width: 900px) {
-    width: min(100% - 44px, 720px);
+    width: min(calc(100% - (var(--mobile-gutter) * 2)), 720px);
     padding-block: 58px 92px;
   }
 `;
@@ -53,11 +53,12 @@ const MiniHero = styled.header.attrs({ className: "mini-case-hero", "data-reveal
 
     h1 {
       font-size: clamp(40px, 12vw, 68px);
+      overflow-wrap: anywhere;
     }
   }
 `;
 
-const MiniKicker = styled.p.attrs({ className: "mini-case-kicker" })`
+const MiniKicker = styled.p.attrs({ className: "mini-case-kicker", "data-motion": "79" })`
   grid-column: 1 / -1;
   margin: 0;
   font-size: clamp(12px, 0.9vw, 15px);
@@ -138,7 +139,7 @@ const MiniRow = styled.section.attrs(({ $reverse }) => ({
   }
 `;
 
-const MiniMeta = styled.div.attrs({ className: "mini-case-meta" })`
+const MiniMeta = styled.div.attrs({ className: "mini-case-meta", "data-motion": "79" })`
   > p {
     margin: 0 0 32px;
     font-size: 12px;
@@ -191,7 +192,7 @@ const copyText = `
   }
 `;
 
-const MiniCopy = styled.div.attrs({ className: "mini-case-copy" })`
+const MiniCopy = styled.div.attrs({ className: "mini-case-copy", "data-motion": "79" })`
   ${copyText}
 `;
 
@@ -218,10 +219,10 @@ const MiniText = styled.section.attrs({ className: "mini-case-text", "data-revea
 
 function RichHeading({ lines }) {
   return (
-    <h1>
+    <h1 data-motion="79">
       {lines.map((line, index) => (
         <Fragment key={line}>
-          {line}
+          {line.replace(/[、，,]/g, "")}
           {index < lines.length - 1 ? <br /> : null}
         </Fragment>
       ))}
@@ -232,8 +233,8 @@ function RichHeading({ lines }) {
 function MiniCasePhoto({ photo }) {
   return (
     <MiniPhoto $variant={photo.className}>
-      <img src={photo.src} alt={photo.alt} />
-      {photo.caption ? <figcaption>{photo.caption}</figcaption> : null}
+      <img data-motion="79" src={photo.src} alt={photo.alt} />
+      {photo.caption ? <figcaption data-motion="79">{photo.caption}</figcaption> : null}
     </MiniPhoto>
   );
 }
@@ -259,7 +260,7 @@ function MiniCaseRow({ section }) {
     <MiniRow $reverse={section.reverse}>
       <MiniCaseMeta title={section.metaTitle} items={section.meta} />
       <MiniCopy>
-        <h2>{section.heading}</h2>
+        <h2>{section.heading.replace(/[、，,]/g, "")}</h2>
         {section.paragraphs.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}
@@ -271,9 +272,9 @@ function MiniCaseRow({ section }) {
 function MiniCaseText({ text }) {
   return (
     <MiniText>
-      <h2>{text.heading}</h2>
+      <h2 data-motion="79">{text.heading.replace(/[、，,]/g, "")}</h2>
       {text.paragraphs.map((paragraph) => (
-        <p key={paragraph}>{paragraph}</p>
+        <p data-motion="79" key={paragraph}>{paragraph}</p>
       ))}
     </MiniText>
   );
@@ -290,7 +291,7 @@ export function MiniCasePage({ caseData }) {
             <MiniHero>
               <MiniKicker>{caseData.kicker}</MiniKicker>
               <RichHeading lines={caseData.heading} />
-              <p>{caseData.intro}</p>
+              <p data-motion="79">{caseData.intro}</p>
             </MiniHero>
 
             {openingPhoto ? <MiniCasePhoto photo={openingPhoto} /> : null}

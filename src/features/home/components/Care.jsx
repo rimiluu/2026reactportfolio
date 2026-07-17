@@ -12,7 +12,7 @@ const CareRoot = styled.section.attrs({ className: "care", "data-reveal": "" })`
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
     gap: 34px;
-    padding: 64px 22px;
+    padding: var(--mobile-section-space) var(--mobile-gutter);
   }
 `;
 
@@ -69,7 +69,7 @@ const CareList = styled.div.attrs({ className: "care-list" })`
   }
 `;
 
-const CareFuture = styled.p.attrs({ className: "care-future" })`
+const CareFuture = styled.p.attrs({ className: "care-future", "data-motion": "19" })`
   width: 100%;
   max-width: none;
   margin: 0;
@@ -92,13 +92,13 @@ export function Care() {
   return (
     <CareRoot>
       <CareHead>
-        <Eyebrow>たいせつにしていること</Eyebrow>
-        <h2>What I Care About</h2>
-        <p>人やもの、場所の背景に目を向け、それらのあいだにあるつながりを形にすることを大切にしています。</p>
+        <Eyebrow data-motion="14">たいせつにしていること</Eyebrow>
+        <h2 data-motion="15">What I Care About</h2>
+        <p data-motion="16">人やもの、場所の背景に目を向け、それらのあいだにあるつながりを形にすることを大切にしています。</p>
       </CareHead>
-      <CareList>
+      <CareList data-motion="17">
         {careItems.map((item) => (
-          <section key={item.title}>
+          <section data-motion="18" key={item.title}>
             <h3>{item.title}</h3>
             <p>{item.text}</p>
           </section>

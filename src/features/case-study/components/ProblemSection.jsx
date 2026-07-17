@@ -13,7 +13,7 @@ const ProblemRoot = styled.div.attrs({ className: "problem", "data-reveal": "" }
 
   @media (max-width: 900px) {
     min-height: auto;
-    padding: 64px 22px;
+    padding: var(--mobile-section-space) var(--mobile-gutter);
   }
 `;
 
@@ -63,12 +63,12 @@ export function ProblemSection({ problems }) {
 
   return (
     <ProblemRoot>
-      <h3>Problem</h3>
+      <h3 data-motion="42">Problem</h3>
       <ProblemList>
         {problems.map(([heading, text]) => (
-          <div key={heading}>
-            <img className="thumb" src={asset("assets/hitokage-img.png")} alt="" />
-            <p>
+          <div data-motion="43" key={heading}>
+            <img className="thumb" data-motion="44" src={asset("assets/hitokage-img.png")} alt="" />
+            <p data-motion="45">
               <strong>{heading}</strong>
               <br />
               {text}

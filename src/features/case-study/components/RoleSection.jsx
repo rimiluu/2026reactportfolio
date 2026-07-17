@@ -16,7 +16,7 @@ const RoleRoot = styled.div.attrs({ className: "role", "data-reveal": "" })`
 
   @media (max-width: 900px) {
     min-height: auto;
-    padding: 64px 22px;
+    padding: var(--mobile-section-space) var(--mobile-gutter);
   }
 `;
 
@@ -69,12 +69,12 @@ export function RoleSection({ roles }) {
 
   return (
     <RoleRoot>
-      <h3>私の役割</h3>
+      <h3 data-motion="74">私の役割</h3>
       <RoleGrid>
         {roles.map(([heading, text], index) => (
-          <RoleCard key={index}>
-            <h4>{heading}</h4>
-            <p>{text}</p>
+          <RoleCard data-motion="75" key={index}>
+            <h4 data-motion="76">{heading}</h4>
+            <p data-motion="76">{text}</p>
           </RoleCard>
         ))}
       </RoleGrid>

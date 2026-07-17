@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { asset } from "../../../utils/assets";
 
-const HeroRoot = styled.div.attrs({ className: "hero", "data-reveal": "" })`
+const HeroRoot = styled.div.attrs({ className: "hero", "data-reveal": "", "data-motion": "1" })`
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(150px, 240px);
   align-items: center;
@@ -36,7 +36,7 @@ const HeroRoot = styled.div.attrs({ className: "hero", "data-reveal": "" })`
   }
 `;
 
-const MobileHeroArt = styled.div.attrs({ className: "mobile-hero-art" })`
+const MobileHeroArt = styled.div.attrs({ className: "mobile-hero-art", "data-motion": "8" })`
   display: none;
 
   @media (max-width: 900px) {
@@ -52,11 +52,11 @@ const MobileHeroArt = styled.div.attrs({ className: "mobile-hero-art" })`
     &::after {
       content: "";
       position: absolute;
-      right: clamp(36px, 8vw, 58px);
+      right: var(--mobile-gutter);
       bottom: clamp(66px, 8vh, 92px);
       width: min(48vw, 226px);
       height: clamp(30px, 7vw, 42px);
-      background-image: url("${import.meta.env.BASE_URL}assets/type-name.svg")});
+      background-image: url("${import.meta.env.BASE_URL}assets/type-name.svg");
       background-repeat: no-repeat;
       background-position: right center;
       background-size: contain;
@@ -65,7 +65,7 @@ const MobileHeroArt = styled.div.attrs({ className: "mobile-hero-art" })`
     &::before {
       content: "Book   UI/UX   Media";
       position: absolute;
-      right: clamp(36px, 8vw, 58px);
+      right: var(--mobile-gutter);
       bottom: clamp(38px, 5vh, 62px);
       color: ${({ theme }) => theme.colors.ink};
       font-size: clamp(13px, 3.8vw, 18px);
@@ -78,36 +78,25 @@ const MobileHeroArt = styled.div.attrs({ className: "mobile-hero-art" })`
 
   @media (max-width: 560px) {
     &::after {
-      right: clamp(28px, 7vw, 42px);
       bottom: clamp(62px, 7vh, 82px);
     }
 
     &::before {
-      right: clamp(28px, 7vw, 42px);
       bottom: clamp(34px, 4vh, 52px);
     }
   }
 
   @media (max-width: 430px) {
     &::after {
-      right: 24px;
       bottom: clamp(70px, 9svh, 86px);
       width: min(44vw, 168px);
       height: clamp(24px, 6vw, 34px);
     }
 
     &::before {
-      right: 24px;
       bottom: clamp(42px, 6svh, 58px);
       font-size: clamp(12px, 3.45vw, 14px);
       letter-spacing: 0.14em;
-    }
-  }
-
-  @media (max-width: 380px) {
-    &::after,
-    &::before {
-      right: 22px;
     }
   }
 
@@ -125,57 +114,55 @@ const MobileHeroArt = styled.div.attrs({ className: "mobile-hero-art" })`
   }
 `;
 
-const MobileHeroLogo = styled.img.attrs({ className: "mobile-hero-logo" })`
+const MobileHeroLogo = styled.img.attrs({ className: "mobile-hero-logo", "data-motion": "6" })`
   position: absolute;
-  left: clamp(22px, 5vw, 34px);
+  left: var(--mobile-gutter);
   top: clamp(150px, 18vh, 220px);
-  width: min(72vw, 345px);
+  width: min(68vw, 300px);
+  max-width: calc(100% - (var(--mobile-gutter) * 2));
   height: auto;
 
   @media (max-width: 560px) {
     top: clamp(132px, 16vh, 190px);
-    width: 73vw;
+    width: min(68vw, 280px);
   }
 
   @media (max-width: 430px) {
     top: clamp(104px, 17svh, 128px);
-    width: auto;
-    max-width: 68vw;
-    height: min(45svh, 320px);
+    width: min(68vw, 260px);
+    max-width: calc(100% - (var(--mobile-gutter) * 2));
+    height: auto;
   }
 
   @media (max-width: 380px) {
-    left: 18px;
     top: 128px;
-    width: 74vw;
+    width: min(66vw, 240px);
   }
 
   @media (max-width: 380px) and (max-height: 720px) {
     top: 112px;
-    height: min(43svh, 286px);
-    max-width: 66vw;
+    width: min(64vw, 220px);
+    height: auto;
   }
 `;
 
-const MobileHeroYear = styled.img.attrs({ className: "mobile-hero-year" })`
+const MobileHeroYear = styled.img.attrs({ className: "mobile-hero-year", "data-motion": "7" })`
   position: absolute;
   top: clamp(54px, 8svh, 92px);
-  right: clamp(24px, 6vw, 36px);
-  width: auto;
-  max-width: none;
-  height: clamp(360px, 58svh, 520px);
+  right: var(--mobile-gutter);
+  width: min(calc(26vw + 20px), 160px);
+  max-width: calc(100% - (var(--mobile-gutter) * 2));
+  height: auto;
   transform: none;
 
   @media (max-width: 430px) {
     top: clamp(48px, 7svh, 76px);
-    right: clamp(22px, 6vw, 30px);
-    height: clamp(330px, 56svh, 470px);
+    width: min(calc(25vw + 20px), 132px);
   }
 
   @media (max-width: 380px) and (max-height: 720px) {
     top: 44px;
-    right: 22px;
-    height: min(54svh, 360px);
+    width: min(calc(24vw + 20px), 112px);
   }
 `;
 
@@ -198,7 +185,7 @@ const Kana = styled.p.attrs({ className: "kana" })`
   }
 `;
 
-const Tags = styled.p.attrs({ className: "tags" })`
+const Tags = styled.p.attrs({ className: "tags", "data-motion": "4" })`
   margin: clamp(36px, 5.5vh, 72px) 0 0;
   font-size: clamp(18px, 1.45vw, 28px);
   font-weight: 800;
@@ -236,16 +223,16 @@ export function Hero() {
       <DesktopHeroContent>
         <Intro>
           <Kana>
-            <img src={asset("assets/type-name.svg")} alt="いとう りみ" />
+            <img data-motion="2" src={asset("assets/type-name.svg")} alt="いとう りみ" />
           </Kana>
           <h1>
             <span className="sr-only">PORTFOLIO</span>
-            <img src={asset("assets/type-portfolio.svg")} alt="" aria-hidden="true" />
+            <img data-motion="3" src={asset("assets/type-portfolio.svg")} alt="" aria-hidden="true" />
           </h1>
           <Tags>Book&nbsp;&nbsp; UI/UX&nbsp;&nbsp; Media</Tags>
         </Intro>
         <Years aria-label="Portfolio period">
-          <img src={asset("assets/type-years.svg")} alt="2024 2026" />
+          <img data-motion="5" src={asset("assets/type-years.svg")} alt="2024 2026" />
         </Years>
       </DesktopHeroContent>
     </HeroRoot>

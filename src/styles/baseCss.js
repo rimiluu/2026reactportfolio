@@ -3,8 +3,17 @@ export const baseCss = `
     box-sizing: border-box;
   }
 
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
 
   body {
@@ -13,6 +22,25 @@ export const baseCss = `
     background: var(--paper);
     font-family: "Space Grotesk", "Neue Haas Grotesk Text", "Helvetica Neue", Arial, "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", sans-serif;
     line-height: 1.85;
+    overflow-x: clip;
+  }
+
+  main,
+  section,
+  article,
+  header,
+  footer,
+  nav,
+  div {
+    min-width: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  p {
+    overflow-wrap: anywhere;
   }
 
   a {
@@ -38,13 +66,14 @@ export const baseCss = `
   }
 
   @media (min-width: 901px) {
-    html:not(:has(body.home-page)):not(:has(body.contact-page)) {
+    html:not(:has(body.home-page)):not(:has(body.contact-page)):not(:has(body.mini-page)) {
       scroll-padding-top: var(--header-height);
       scroll-snap-type: y mandatory;
     }
 
     html:has(body.home-page),
-    html:has(body.contact-page) {
+    html:has(body.contact-page),
+    html:has(body.mini-page) {
       scroll-padding-top: 0;
       scroll-snap-type: none;
     }
@@ -53,6 +82,11 @@ export const baseCss = `
   @media (max-width: 900px) {
     html {
       scroll-snap-type: none;
+    }
+
+    body,
+    #root {
+      overflow-x: clip;
     }
   }
 

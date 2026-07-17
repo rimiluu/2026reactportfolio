@@ -14,19 +14,16 @@ const AboutRoot = styled.div.attrs({ className: "about", "data-reveal": "" })`
     grid-template-columns: 1fr;
     gap: 42px;
     min-height: auto;
-    padding-inline: 22px;
+    padding-inline: var(--mobile-gutter);
   }
 
   @media (max-width: 560px) {
     padding-block: 64px;
   }
 
-  @media (max-width: 380px) {
-    padding-inline: 18px;
-  }
 `;
 
-const Photo = styled.img.attrs({ className: "photo" })`
+const Photo = styled.img.attrs({ className: "photo", "data-motion": "9" })`
   display: block;
   width: min(100%, 500px);
   aspect-ratio: 1;
@@ -37,7 +34,7 @@ const Photo = styled.img.attrs({ className: "photo" })`
   }
 `;
 
-const Profile = styled.div.attrs({ className: "profile" })`
+const Profile = styled.div.attrs({ className: "profile", "data-motion": "13" })`
   max-width: 680px;
 
   p:last-child {
@@ -49,7 +46,7 @@ const Profile = styled.div.attrs({ className: "profile" })`
   }
 `;
 
-const Eyebrow = styled.p.attrs({ className: "eyebrow" })`
+const Eyebrow = styled.p.attrs({ className: "eyebrow", "data-motion": "10" })`
   margin: 0 0 8px;
   font-size: 1.25rem;
   font-weight: 800;
@@ -73,10 +70,10 @@ export function About() {
       <Photo src={asset("assets/face.png")} alt="" />
       <Profile>
         <Eyebrow>神山まるごと高専3年</Eyebrow>
-        <Kana>
+        <Kana data-motion="11">
           <img src={asset("assets/type-name.svg")} alt="いとう りみ" />
         </Kana>
-        <p>
+        <p data-motion="12">
           神山まるごと高専で、Web制作やUI/UXデザイン、企画づくりに取り組んでいます。本や地域、音声など、身近にあるものを人に届けるWebアプリ「ホンノバ」、健康情報をToDoに変えるUI「MAKE YOU」、Podcastメディア「KamiyamaCast」の運用などを通して、情報や体験を見つけやすく届けることを考えています。
         </p>
       </Profile>
