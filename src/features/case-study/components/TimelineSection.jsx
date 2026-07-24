@@ -48,13 +48,7 @@ const Timeline = styled.div.attrs({ className: "timeline" })`
   margin: 60px auto 0;
 
   .timeline-line {
-    position: absolute;
-    left: 22px;
-    top: 12px;
-    bottom: 12px;
-    width: 3px;
-    background: rgba(255, 255, 255, 0.92);
-    transform-origin: center top;
+    display: none;
   }
 
   div {
@@ -64,19 +58,35 @@ const Timeline = styled.div.attrs({ className: "timeline" })`
     gap: 36px;
   }
 
+  div:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 23px;
+    top: 62px;
+    width: 2px;
+    height: calc(100% + 40px);
+    background: #ffffff;
+  }
+
   span {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 48px;
     color: #ffffff;
     font-weight: 900;
+    text-align: center;
   }
 
   .timeline-dot {
     position: absolute;
+    z-index: 1;
     left: 10px;
     top: 26px;
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.92);
+    background: #ffffff;
   }
 
   p {
@@ -94,6 +104,10 @@ const Timeline = styled.div.attrs({ className: "timeline" })`
     div {
       grid-template-columns: 70px 1fr;
       gap: 24px;
+    }
+
+    div:not(:last-child)::after {
+      height: calc(100% + 14px);
     }
   }
 `;

@@ -153,7 +153,7 @@ export const caseStudies = {
     ],
   },
   kamiyamacast: {
-    bodyClass: "",
+    bodyClass: "cast-page",
     title: "KamiyamaCast | いとう りみ Portfolio",
     sectionClassName: "honnova-case",
     logo: {

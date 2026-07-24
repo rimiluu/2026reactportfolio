@@ -3,7 +3,6 @@ import styled from "styled-components";
 const RoleRoot = styled.div.attrs({ className: "role", "data-reveal": "" })`
   min-height: calc(100svh - var(--header-height));
   padding: 80px clamp(70px, 10vw, 220px);
-  border-bottom: 1px solid ${({ theme }) => theme.colors.line};
   scroll-snap-align: start;
   scroll-snap-stop: always;
 
@@ -31,6 +30,9 @@ const RoleGrid = styled.div.attrs({ className: "role-grid" })`
 
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 28px;
+    border: 0;
   }
 `;
 
@@ -59,8 +61,21 @@ const RoleCard = styled.div.attrs({ className: "role-card" })`
 
   @media (max-width: 900px) {
     min-height: 0;
-    padding: 28px 0;
-    border-right: 0;
+    padding: 16px 18px;
+    background: #f3f3f1;
+    border: 1px solid #d8d8d5;
+    border-radius: 8px;
+
+    h4 {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.35;
+      letter-spacing: 0.06em;
+    }
+
+    p {
+      display: none;
+    }
   }
 `;
 

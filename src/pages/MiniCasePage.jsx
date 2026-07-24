@@ -52,7 +52,7 @@ const MiniHero = styled.header.attrs({ className: "mini-case-hero", "data-reveal
     gap: 28px;
 
     h1 {
-      font-size: clamp(40px, 12vw, 68px);
+      font-size: clamp(32px, 9.8vw, 54px);
       overflow-wrap: anywhere;
     }
   }
@@ -190,6 +190,20 @@ const copyText = `
     line-height: 2;
     letter-spacing: 0.08em;
   }
+
+  .mobile-only {
+    display: none;
+  }
+
+  @media (max-width: 900px) {
+    .desktop-only {
+      display: none;
+    }
+
+    .mobile-only {
+      display: block;
+    }
+  }
 `;
 
 const MiniCopy = styled.div.attrs({ className: "mini-case-copy", "data-motion": "79" })`
@@ -214,6 +228,14 @@ const MiniText = styled.section.attrs({ className: "mini-case-text", "data-revea
 
   @media (max-width: 900px) {
     margin-left: 0;
+
+    .desktop-only {
+      display: none;
+    }
+
+    .mobile-only {
+      display: block;
+    }
   }
 `;
 
@@ -256,13 +278,18 @@ function MiniCaseMeta({ title, items }) {
 }
 
 function MiniCaseRow({ section }) {
+  const hasMobileText = Boolean(section.mobileParagraphs?.length);
+
   return (
     <MiniRow $reverse={section.reverse}>
       <MiniCaseMeta title={section.metaTitle} items={section.meta} />
       <MiniCopy>
         <h2>{section.heading.replace(/[、，,]/g, "")}</h2>
         {section.paragraphs.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
+          <p className={hasMobileText ? "desktop-only" : undefined} key={paragraph}>{paragraph}</p>
+        ))}
+        {section.mobileParagraphs?.map((paragraph) => (
+          <p className="mobile-only" key={paragraph}>{paragraph}</p>
         ))}
       </MiniCopy>
     </MiniRow>
@@ -270,11 +297,16 @@ function MiniCaseRow({ section }) {
 }
 
 function MiniCaseText({ text }) {
+  const hasMobileText = Boolean(text.mobileParagraphs?.length);
+
   return (
     <MiniText>
       <h2 data-motion="79">{text.heading.replace(/[、，,]/g, "")}</h2>
       {text.paragraphs.map((paragraph) => (
-        <p data-motion="79" key={paragraph}>{paragraph}</p>
+        <p className={hasMobileText ? "desktop-only" : undefined} data-motion="79" key={paragraph}>{paragraph}</p>
+      ))}
+      {text.mobileParagraphs?.map((paragraph) => (
+        <p className="mobile-only" data-motion="79" key={paragraph}>{paragraph}</p>
       ))}
     </MiniText>
   );

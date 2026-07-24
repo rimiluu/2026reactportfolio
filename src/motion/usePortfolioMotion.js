@@ -195,13 +195,22 @@ export function usePortfolioMotion(pageId) {
           if (!Number.isFinite(numeric)) return;
           const suffix = original.replace(/[0-9.,-]/g, "");
           const counter = { value: 0 };
+          let latestValue = 0;
+          element.textContent = `0${suffix}`;
+
           animations.push(animate(counter, {
             value: numeric,
-            duration: 950,
+            duration: 1150,
             delay: 180,
             ease: "out(3)",
             onUpdate: () => {
-              element.textContent = `${Math.round(counter.value).toLocaleString("ja-JP")}${suffix}`;
+              const progress = numeric === 0 ? 1 : counter.value / numeric;
+              const randomLift = Math.random() * numeric * 0.08 * (1 - progress);
+              latestValue = Math.max(latestValue, Math.min(numeric, counter.value + randomLift));
+              element.textContent = `${Math.round(latestValue).toLocaleString("ja-JP")}${suffix}`;
+            },
+            onComplete: () => {
+              element.textContent = `${Math.round(numeric).toLocaleString("ja-JP")}${suffix}`;
             },
           }));
         });

@@ -149,6 +149,10 @@ const Field = styled.label`
   padding: clamp(24px, 4vh, 38px) 0;
   border-bottom: 1px solid ${({ theme }) => theme.colors.line};
 
+  &:last-of-type {
+    border-bottom-color: #050505;
+  }
+
   span {
     font-size: 13px;
     font-weight: 900;

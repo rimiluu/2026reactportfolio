@@ -43,6 +43,10 @@ const FinalGridRoot = styled.div.attrs({ className: "text-grid final-grid", "dat
     gap: 44px;
     min-height: auto;
     padding: var(--mobile-section-space) var(--mobile-gutter);
+
+    .cast-page & article:first-child {
+      border-top: 0;
+    }
   }
 `;
 

@@ -13,6 +13,15 @@ const SiteFooter = styled.footer.attrs({ className: "footer", "data-reveal": "" 
   border-top: 1px solid ${({ theme }) => theme.colors.line};
   font-weight: 800;
 
+  p {
+    margin: 0;
+    color: #6f6f68;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+  }
+
   body:not(.home-page):not(.mini-page) & {
     scroll-snap-align: end;
     scroll-snap-stop: always;
@@ -30,6 +39,10 @@ const SiteFooter = styled.footer.attrs({ className: "footer", "data-reveal": "" 
     gap: 8px;
     min-height: 96px;
     padding: 30px var(--mobile-gutter);
+
+    a {
+      order: -1;
+    }
   }
 `;
 
@@ -38,7 +51,7 @@ export function Footer() {
 
   return (
     <SiteFooter>
-      <p>Rimi Ito Portfolio</p>
+      <p>© 2026 Rimi Ito Portfolio</p>
       <Link to={isHome ? "/#top" : "/"}>Back to top</Link>
     </SiteFooter>
   );

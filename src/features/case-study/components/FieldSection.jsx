@@ -82,9 +82,11 @@ export const FieldRoot = styled.div.attrs(({ $variant }) => ({
     }
 
     dl {
-      grid-template-columns: 1fr auto;
-      gap: 34px 72px;
-      width: min(520px, 100%);
+      grid-template-columns: max-content max-content;
+      gap: 34px 70px;
+      justify-self: start;
+      width: fit-content;
+      max-width: 100%;
     }
 
     dt {
@@ -93,8 +95,14 @@ export const FieldRoot = styled.div.attrs(({ $variant }) => ({
     }
 
     dd {
+      display: inline-block;
       min-width: 0;
-      font-size: 24px;
+      font-size: 28px;
+      line-height: 1.1;
+    }
+
+    &.make-feedback {
+      border-bottom: 0;
     }
   }
 
@@ -102,7 +110,7 @@ export const FieldRoot = styled.div.attrs(({ $variant }) => ({
     gap: 36px;
 
     dl {
-      gap: 22px 36px;
+      gap: 22px 56px;
     }
   }
 `;

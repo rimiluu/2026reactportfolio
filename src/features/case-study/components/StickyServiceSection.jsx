@@ -62,6 +62,12 @@ const ServiceRoot = styled.div.attrs(({ $variant }) => ({
     min-height: auto;
     padding-bottom: 0;
 
+    &.make-service-design,
+    &.cast-service-design {
+      background-color: #ffffff;
+      background-image: none;
+    }
+
     > .eyebrow {
       width: auto;
       margin: 0;
@@ -182,6 +188,12 @@ const ServiceScreenStack = styled.div.attrs(({ $variant }) => ({
       $variant?.includes("is-landscape-active") || $variant?.includes("service-screen-stack--media")
         ? "min(100%, 320px)"
         : "min(46vw, 170px)"};
+
+    .service-screen,
+    .cast-service-screen {
+      border: 0;
+      box-shadow: none;
+    }
   }
 `;
 
@@ -239,9 +251,7 @@ const ServiceStep = styled.div.attrs({ className: "service-step" })`
     padding: var(--mobile-section-space) var(--mobile-gutter) 52px;
 
     .service-step__number {
-      top: 64px;
-      right: 18px;
-      width: clamp(72px, 24vw, 120px);
+      display: none;
     }
 
     h3 {
@@ -291,7 +301,7 @@ export function StickyServiceSection({ service }) {
     ];
 
     if (activeCopy) {
-      animations.push(animate(activeCopy.querySelectorAll("h3, p, .service-step__number"), {
+      animations.push(animate(activeCopy.querySelectorAll("h3, p"), {
         opacity: [0.45, 1],
         x: [14, 0],
         duration: 430,

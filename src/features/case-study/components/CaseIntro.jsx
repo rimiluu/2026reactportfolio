@@ -44,7 +44,7 @@ const LogoPanel = styled.div.attrs({ className: "honnova-logo-panel" })`
   }
 
   .makeyou-logo-img {
-    width: min(100%, 280px);
+    width: min(100%, 300px);
   }
 
   @media (min-width: 901px) {
@@ -57,11 +57,17 @@ const LogoPanel = styled.div.attrs({ className: "honnova-logo-panel" })`
     display: grid;
     grid-template-columns: 1fr;
     align-content: center;
+    justify-items: center;
     min-height: min(420px, 58svh);
     padding: 54px var(--mobile-gutter);
 
     > div {
       padding: 18px 0;
+    }
+
+    .honnova-logo-img,
+    .makeyou-logo-img {
+      margin-inline: auto;
     }
   }
 `;
